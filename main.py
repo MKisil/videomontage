@@ -5,10 +5,10 @@ from moviepy.editor import AudioFileClip
 from moviepy.video.VideoClip import ImageClip
 
 directory_images_path = Path('images')
-images = [file.name for file in directory_images_path.iterdir() if file.name != '.gitkeep']
+images = sorted([file.name for file in directory_images_path.iterdir() if file.name.split('.')[0].isdigit()], key=lambda i: int(i.split('.')[0]))
 
 directory_audio_path = Path('audio')
-audio = [file.name for file in directory_audio_path.iterdir() if file.name != '.gitkeep']
+audio = sorted([file.name for file in directory_audio_path.iterdir() if file.name.split('.')[0].isdigit()], key=lambda i: int(i.split('.')[0]))
 
 
 def create_video(i):
@@ -18,8 +18,8 @@ def create_video(i):
 
     image_clip = image_clip.set_audio(audio_clip)
 
-    filename = f"{''.join(images[i].split('.')[:-1])}_{''.join(audio[i].split('.')[:-1])}.mp4"
-    image_clip.write_videofile(f'videos/{filename}', logger=None, fps=70)
+    filename = f"{''.join(images[i].split('.')[0])}_{''.join(audio[i].split('.')[0])}.mp4"
+    image_clip.write_videofile(f'videos/{filename}', logger=None, fps=60)
     print(f"Створено відео: {filename}")
 
 
