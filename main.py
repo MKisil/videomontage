@@ -5,10 +5,10 @@ from moviepy.editor import AudioFileClip
 from moviepy.video.VideoClip import ImageClip
 
 directory_images_path = Path('images')
-images = sorted([file.name for file in directory_images_path.iterdir() if file.name.split('.')[0].isdigit()], key=lambda i: int(i.split('.')[0]))
+images = sorted([file.name for file in directory_images_path.iterdir() if file.name.split('.')[0].strip().isdigit()], key=lambda i: int(i.split('.')[0]))
 
 directory_audio_path = Path('audio')
-audio = sorted([file.name for file in directory_audio_path.iterdir() if file.name.split('.')[0].isdigit()], key=lambda i: int(i.split('.')[0]))
+audio = sorted([file.name for file in directory_audio_path.iterdir() if file.name.split('.')[0].strip().isdigit()], key=lambda i: int(i.split('.')[0]))
 
 
 def create_video(i):
